@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { FaTools, FaCar, FaUserCog, FaClock } from 'react-icons/fa'
@@ -8,7 +9,7 @@ import Footer from '../components/Footer'
 import './about.css'
 
 interface ServiceItem {
-  icon: JSX.Element;
+  icon: React.ReactElement;
   title: string;
   description: string;
 }
@@ -44,34 +45,25 @@ export default function Page() {
   return (
     <div className="page-wrapper">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <motion.section 
-        className="hero"
-        style={{ opacity, scale }}
-      >
+      <motion.section className="hero" style={{ opacity, scale }}>
         <div className="hero-media">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hero-video"
-          >
+          <video autoPlay muted loop playsInline className="hero-video">
             <source src="/about1.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay"></div>
         </div>
 
         <div className="hero-content">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             SATISH GARAGE
           </motion.h1>
-          <motion.div 
+          <motion.div
             className="animated-line"
             initial={{ width: 0 }}
             animate={{ width: '120px' }}
@@ -90,7 +82,7 @@ export default function Page() {
       {/* About Section */}
       <section className="about">
         <div className="container">
-          <motion.div 
+          <motion.div
             className="about-grid"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,12 +98,12 @@ export default function Page() {
                 trust of thousands of satisfied clients.
               </p>
               <div className="stats-grid">
-                {[ 
+                {[
                   { number: "13+", text: "YEARS OF EXCELLENCE" },
                   { number: "10K+", text: "VEHICLES SERVICED" },
                   { number: "15+", text: "EXPERT TECHNICIANS" }
                 ].map((stat, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     className="stat-box"
                     initial={{ opacity: 0, y: 20 }}
@@ -125,6 +117,7 @@ export default function Page() {
                 ))}
               </div>
             </div>
+
             <div className="about-image">
               <Image
                 src="/adrien-fu-RMLt7FsuPOo-unsplash.jpg"
