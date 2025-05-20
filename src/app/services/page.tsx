@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaCar, FaTools, FaCalendar, FaClock } from 'react-icons/fa'
+import { FaCar, FaTools } from 'react-icons/fa' // Removed unused FaCalendar and FaClock
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './services.css'
@@ -41,9 +41,7 @@ export default function ServicesPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you'll add the logic to send the booking data to your admin dashboard
     console.log('Booking submitted:', bookingForm)
-    // Reset form after submission
     setBookingForm({
       service: activeService,
       name: '',
