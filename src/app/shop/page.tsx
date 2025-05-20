@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import styles from './shop.module.css'
@@ -19,11 +18,10 @@ interface Product {
 export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [coinBalance, setCoinBalance] = useState(0)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All Categories')
-  const [sortBy, setSortBy] = useState('price')
+  const [sortBy, setSortBy] = useState<'price' | 'coin_cost'>('price')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
   useEffect(() => {
@@ -51,11 +49,10 @@ export default function ShopPage() {
 
       if (productsError) throw productsError
       setProducts(productsData || [])
-      
-    } catch (error: any) {
-      setError(error.message)
-    } finally {
-      setLoading(false)
+
+    } catch (err) {
+      const typedError = err as Error
+      setError(typedError.message)
     }
   }
 
@@ -80,16 +77,17 @@ export default function ShopPage() {
 
       if (purchaseError) throw purchaseError
       await fetchData()
-      
-    } catch (error: any) {
-      setError(error.message)
+
+    } catch (err) {
+      const typedError = err as Error
+      setError(typedError.message)
     }
   }
 
   const filteredProducts = products
     .filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          product.description.toLowerCase().includes(searchQuery.toLowerCase())
+                            product.description.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = selectedCategory === 'All Categories' || product.category === selectedCategory
       return matchesSearch && matchesCategory
     })
@@ -145,7 +143,7 @@ export default function ShopPage() {
 
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={(e) => setSortBy(e.target.value as 'price' | 'coin_cost')}
               >
                 <option value="price">Sort by Price</option>
                 <option value="coin_cost">Sort by Coins</option>
@@ -188,9 +186,11 @@ export default function ShopPage() {
                     disabled={product.stock_quantity <= 0 || product.coin_cost > coinBalance}
                     className={styles.purchaseButton}
                   >
-                    {product.stock_quantity <= 0 ? 'Out of Stock' :
-                     product.coin_cost > coinBalance ? 'Insufficient Coins' :
-                     'Purchase Now'}
+                    {product.stock_quantity <= 0
+                      ? 'Out of Stock'
+                      : product.coin_cost > coinBalance
+                      ? 'Insufficient Coins'
+                      : 'Purchase Now'}
                   </button>
                 </div>
               </div>
