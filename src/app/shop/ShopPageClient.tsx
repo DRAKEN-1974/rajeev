@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import styles from './shop.css'
+import styles from './shop.module.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
