@@ -5,6 +5,12 @@ import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import styles from './contact.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMapMarkerAlt,
+  faPhone,
+  faEnvelope
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,8 +19,6 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
-
-  const [activeTab, setActiveTab] = useState('general');
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -36,7 +40,7 @@ export default function ContactPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
   };
@@ -90,7 +94,7 @@ export default function ContactPage() {
         >
           <motion.div className={styles.infoCard} variants={itemVariants}>
             <div className={styles.iconWrapper}>
-              <i className="fas fa-map-marker-alt"></i>
+              <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />
             </div>
             <h3>Visit Us</h3>
             <p>123 Business Avenue</p>
@@ -99,7 +103,7 @@ export default function ContactPage() {
 
           <motion.div className={styles.infoCard} variants={itemVariants}>
             <div className={styles.iconWrapper}>
-              <i className="fas fa-phone"></i>
+              <FontAwesomeIcon icon={faPhone} size="2x" />
             </div>
             <h3>Call Us</h3>
             <p>+1 (555) 123-4567</p>
@@ -108,7 +112,7 @@ export default function ContactPage() {
 
           <motion.div className={styles.infoCard} variants={itemVariants}>
             <div className={styles.iconWrapper}>
-              <i className="fas fa-envelope"></i>
+              <FontAwesomeIcon icon={faEnvelope} size="2x" />
             </div>
             <h3>Email Us</h3>
             <p>info@yourcompany.com</p>
