@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { FaTools, FaCar, FaUserCog, FaClock } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import './about.css' // Make sure about.css is in the same directory as this file
+import './about.css'
 
 interface ServiceItem {
   icon: JSX.Element;
@@ -18,7 +17,6 @@ export default function Page() {
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.98])
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
   const services: ServiceItem[] = [
     {
@@ -59,7 +57,6 @@ export default function Page() {
             loop
             playsInline
             className="hero-video"
-            onLoadedData={() => setIsVideoLoaded(true)}
           >
             <source src="/about1.mp4" type="video/mp4" />
           </video>
@@ -109,7 +106,7 @@ export default function Page() {
                 trust of thousands of satisfied clients.
               </p>
               <div className="stats-grid">
-                {[
+                {[ 
                   { number: "13+", text: "YEARS OF EXCELLENCE" },
                   { number: "10K+", text: "VEHICLES SERVICED" },
                   { number: "15+", text: "EXPERT TECHNICIANS" }
